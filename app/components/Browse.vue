@@ -18,10 +18,58 @@ export default {
             message: "<!-- aassBrowse page content goes heress -->",
                cardList:[
                 {
-                    type:'Banana',
+                    type:'banana',
                     id:1,
                     name:'Banana',
                     src:'~/images/banana.png'
+                },
+                {
+                    type:'orange',
+                    id:2,
+                    name:'Orange',
+                    src:'~/images/orange.jpg'
+                },
+                {
+                    type:'ananas',
+                    id:23,
+                    name:'Ananas',
+                    src:'~/images/ananas.png'
+                },
+                {
+                    type:'kiwi',
+                    id:4,
+                    name:'Kiwi',
+                    src:'~/images/kiwi.jpg'
+                },
+                {
+                    type:'lemon',
+                    id:5,
+                    name:'Lemon',
+                    src:'~/images/lemon.png'
+                },
+                {
+                    type:'mango',
+                    id:6,
+                    name:'Mango',
+                    src:'~/images/mango.png'
+                },
+                {
+                    type:'grape',
+                    id:7,
+                    name:'Grape',
+                    src:'~/images/grape.jpg'
+                },
+                {
+                    type:'apple',
+                    id:8,
+                    name:'Apple',
+                    src:'~/images/apple.png'
+                },
+                {
+                    type:'tangerine',
+                    id:9,
+                    name:'Tangerine',
+                    src:'~/images/tangerine.jpg'
                 },
             ]
         };
