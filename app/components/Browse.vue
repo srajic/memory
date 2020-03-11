@@ -157,7 +157,7 @@ export default {
         }
       }
       if(this.foundCounter===this.generatedList.length){
-        this.resetGame();
+        this.popupDialog();
       }
     },
 
@@ -185,7 +185,27 @@ export default {
       this.flippedItems = [];
       this.clickCoutner = 0;
       this.foundCounter = 0;
-    }
+    },
+    popupDialog() {
+      confirm({
+        title: "Pobjedili ste !",
+        message: "Želite li započeti novu igru",
+        okButtonText: "Da",
+        cancelButtonText: "NE",
+        
+      }).then((result) => {
+        console.log(result);
+        if(result){
+          this.resetGame();
+        } else {
+          this.resetGame();
+          // this
+        }
+
+        // The result property is true if the dialog is closed with the OK button, false if closed with the Cancel button or undefined if closed with a neutral button.
+        console.log("Dialog result: " + result);
+      });
+    },
   }
 };
 </script>
