@@ -1,5 +1,8 @@
 <template lang="html">
     <Page @loaded="onPageLoad">
+   <ActionBar>
+            <Label :text="'Clicks:' +clickCoutner +','+ 'Pairs found:'+ foundCounter"></Label>
+    </ActionBar>
     <FlexboxLayout justifyContent="space-around" flexWrap="wrap"  backgroundColor="#3c495e">
       <template v-for="(item,index) in generatedList">
          <Label  height="20" :text="item.identifier " v-show="!isShown(item)" class="card-image" width="30%" backgroundColor="#1c6b48" @tap="showCurrentItems(item,index)"  />
@@ -23,8 +26,10 @@ export default {
       message: "<!-- aassBrowse page  -->",
       generatedList: [],
       flippedItems: [],
-      closeCardInterval:'',
-      closeCardIntervalTimer:3000,
+      closeCardInterval: "",
+      closeCardIntervalTimer: 3000,
+      clickCoutner: 0,
+      foundCounter: 0,
       cardList: [
         {
           type: "banana",
@@ -85,12 +90,12 @@ export default {
   },
   computed: {
     isShown() {
-      return (e) => {
-        if(e.alreadyFound){
-          return true
+      return e => {
+        if (e.alreadyFound) {
+          return true;
         }
-        for (let i = 0;i<this.flippedItems.length;i++){
-          if(this.flippedItems[i].identifier===e.identifier){
+        for (let i = 0; i < this.flippedItems.length; i++) {
+          if (this.flippedItems[i].identifier === e.identifier) {
             return true;
           }
         }
@@ -99,8 +104,10 @@ export default {
     }
   },
   methods: {
-    
     onPageLoad(args) {
+      this.generateCurrentGameList();
+    },
+    generateCurrentGameList() {
       let list = [];
       this.cardList.forEach(element => {
         let firstCard = JSON.parse(JSON.stringify(element));
@@ -125,41 +132,42 @@ export default {
     showCurrentItems(item, index) {
       // console.log(index, item.id);
       if (item.hasOwnProperty("alreadyFound") && item.alreadyFound) {
-       
         return;
       }
       this.cancleClosecardInterval();
+      this.clickCoutner++;
       if (this.flippedItems.length === 2) {
         this.flippedItems = [];
       }
       this.flippedItems.push(item);
-     
 
-        if (this.flippedItems.length === 2) {
-          this.startClosecardInterval();
-          if (this.flippedItems[0].id === this.flippedItems[1].id) {
-            this.generatedList.forEach(e => {
-              if (e.identifier === this.flippedItems[0].identifier) {
-                e.alreadyFound = true;
-              }
-              if (e.identifier === this.flippedItems[1].identifier) {
-                e.alreadyFound = true;
-              }
-            });
-          }
+      if (this.flippedItems.length === 2) {
+        this.startClosecardInterval();
+        if (this.flippedItems[0].id === this.flippedItems[1].id) {
+          this.generatedList.forEach(e => {
+            if (e.identifier === this.flippedItems[0].identifier) {
+              e.alreadyFound = true;
+              this.foundCounter++;
+            }
+            if (e.identifier === this.flippedItems[1].identifier) {
+              e.alreadyFound = true;
+              this.foundCounter++;
+            }
+          });
         }
-
-     
-
+      }
+      if(this.foundCounter===this.generatedList.length){
+        this.resetGame();
+      }
     },
 
-    startClosecardInterval(){
-      this.closeCardInterval= setTimeout(() => {
+    startClosecardInterval() {
+      this.closeCardInterval = setTimeout(() => {
         this.flippedItems = [];
-        console.log('timeout');
+        console.log("timeout");
       }, this.closeCardIntervalTimer);
     },
-    cancleClosecardInterval(){
+    cancleClosecardInterval() {
       clearTimeout(this.closeCardInterval);
     },
 
@@ -170,6 +178,13 @@ export default {
       }
       // console.log(a);
       return a;
+    },
+
+    resetGame() {
+      this.generateCurrentGameList();
+      this.flippedItems = [];
+      this.clickCoutner = 0;
+      this.foundCounter = 0;
     }
   }
 };
