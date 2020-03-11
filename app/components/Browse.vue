@@ -23,6 +23,8 @@ export default {
       message: "<!-- aassBrowse page  -->",
       generatedList: [],
       flippedItems: [],
+      closeCardInterval:'',
+      closeCardIntervalTimer:3000,
       cardList: [
         {
           type: "banana",
@@ -126,6 +128,7 @@ export default {
        
         return;
       }
+      this.cancleClosecardInterval();
       if (this.flippedItems.length === 2) {
         this.flippedItems = [];
       }
@@ -133,7 +136,7 @@ export default {
      
 
         if (this.flippedItems.length === 2) {
-
+          this.startClosecardInterval();
           if (this.flippedItems[0].id === this.flippedItems[1].id) {
             this.generatedList.forEach(e => {
               if (e.identifier === this.flippedItems[0].identifier) {
@@ -148,6 +151,16 @@ export default {
 
      
 
+    },
+
+    startClosecardInterval(){
+      this.closeCardInterval= setTimeout(() => {
+        this.flippedItems = [];
+        console.log('timeout');
+      }, this.closeCardIntervalTimer);
+    },
+    cancleClosecardInterval(){
+      clearTimeout(this.closeCardInterval);
     },
 
     shuffle(a) {
