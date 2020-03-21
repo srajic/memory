@@ -20,12 +20,14 @@
 </template>
 
 <script>
+import {application} from "tns-core-modules/application";
 export default {
   data: () => {
     return {
       message: "<!-- aassBrowse page  -->",
       generatedList: [],
       flippedItems: [],
+      dataCreated:false,
       closeCardInterval: "",
       closeCardIntervalTimer: 3000,
       clickCoutner: 0,
@@ -91,6 +93,7 @@ export default {
   computed: {
     isShown() {
       return e => {
+     
         if (e.alreadyFound) {
           return true;
         }
@@ -105,7 +108,12 @@ export default {
   },
   methods: {
     onPageLoad(args) {
+      console.log('dcdcdc',this.dataCreated,this.flippedItems.length);
+      if(this.dataCreated){
+        return;
+      }
       this.generateCurrentGameList();
+ 
     },
     generateCurrentGameList() {
       let list = [];
@@ -120,6 +128,7 @@ export default {
       });
       // console.log(list);
       this.generatedList = this.shuffle(list);
+      this.dataCreated = true;
     },
 
     reorder(args) {
@@ -156,7 +165,7 @@ export default {
           });
         }
       }
-      if(this.foundCounter===this.generatedList.length){
+      if (this.foundCounter === this.generatedList.length) {
         this.popupDialog();
       }
     },
@@ -164,7 +173,7 @@ export default {
     startClosecardInterval() {
       this.closeCardInterval = setTimeout(() => {
         this.flippedItems = [];
-        console.log("timeout");
+        // console.log("timeout");
       }, this.closeCardIntervalTimer);
     },
     cancleClosecardInterval() {
@@ -191,11 +200,10 @@ export default {
         title: "Pobjedili ste !",
         message: "Želite li započeti novu igru",
         okButtonText: "Da",
-        cancelButtonText: "NE",
-        
-      }).then((result) => {
-        console.log(result);
-        if(result){
+        cancelButtonText: "NE"
+      }).then(result => {
+        // console.log(result);
+        if (result) {
           this.resetGame();
         } else {
           this.resetGame();
@@ -203,9 +211,9 @@ export default {
         }
 
         // The result property is true if the dialog is closed with the OK button, false if closed with the Cancel button or undefined if closed with a neutral button.
-        console.log("Dialog result: " + result);
+        // console.log("Dialog result: " + result);
       });
-    },
+    }
   }
 };
 </script>
