@@ -1,7 +1,7 @@
 <template lang="html">
     <Page @loaded="onPageLoad">
    <ActionBar>
-            <Label :text="'Clicks:' +clickCoutner +','+ 'Pairs found:'+ foundCounter"></Label>
+            <Label :text="'Clicks:' +clickCoutner +','+ 'Pairs found:'+ foundCounterCopmuted"></Label>
     </ActionBar>
     <FlexboxLayout justifyContent="space-around" flexWrap="wrap"  backgroundColor="#3c495e">
       <template v-for="(item,index) in generatedList">
@@ -50,7 +50,7 @@ export default {
         },
         {
           type: "ananas",
-          id: 23,
+          id: 3,
           name: "Ananas",
           src: "~/images/ananas.jpg"
         },
@@ -94,6 +94,14 @@ export default {
     };
   },
   computed: {
+
+    foundCounterCopmuted(){
+      if(this.foundCounter>=2){
+       return this.foundCounter/2;
+      }
+      return 0;
+    }, 
+
     isShown() {
       return e => {
      
@@ -241,7 +249,7 @@ export default {
   translateX :-300;
   opacity:0;
   // margin-left:2%;
-  margin-left:1%;
+  // margin-left:1%;
   // margin-right:1%;
 }
 .card-image {
@@ -249,7 +257,7 @@ export default {
   margin-top: 1%;
   translateX :-300;
   opacity:1;
-  margin-left:1%;
+  // margin-left:1%;
   // margin-right:1%;
 }
 </style>
