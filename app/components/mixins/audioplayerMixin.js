@@ -43,7 +43,7 @@ export default {
                 });
         },
 
-        playPopSound() {
+        playSound() {
             // this.player.pause();
             if (this.audioDisabled) {
                 return;

@@ -43,12 +43,22 @@
 import Items from "./Items.vue";
 import Browse from "./Browse.vue";
 import Search from "./Search.vue";
+import audioplayerMixin from "./mixins/audioplayerMixin";
 
 export default {
+  mixins: [audioplayerMixin],
   components: {
     Items,
     Browse,
     Search
+  },
+  data() {
+    return {
+      audioFile: "~/sounds/classicalPop.mp3"
+    };
+  },
+  mounted() {
+    this.playSound();
   }
 };
 </script>
@@ -59,5 +69,4 @@ export default {
 // End custom common variables
 
 // Custom styles
-
 </style>

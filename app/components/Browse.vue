@@ -163,7 +163,7 @@ export default {
       if (item.hasOwnProperty("alreadyFound") && item.alreadyFound) {
         return;
       }
-      this.playPopSound();
+      this.playSound();
       this.cancleClosecardInterval();
       this.clickCoutner++;
       if (this.flippedItems.length === 2) {
