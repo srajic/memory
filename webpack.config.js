@@ -345,7 +345,8 @@ module.exports = env => {
                     { from: { glob: "**/*.+(jpg|png)" } },
                     { from: { glob: "assets/**/*" } },
                     { from: { glob: "sounds/**/*" } },
-                    { from: { glob: "**/*.mp3" } }
+                    { from: { glob: "**/*.mp3" } },
+                    { from: { glob: "**/*.ogg" } }
                 ],
                 { ignore: [`${relative(appPath, appResourcesFullPath)}/**`] }
             ),
