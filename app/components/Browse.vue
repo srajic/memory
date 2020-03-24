@@ -3,10 +3,12 @@
    <ActionBar>
             <Label :text="'Clicks:' +clickCoutner +','+ 'Pairs found:'+ foundCounterCopmuted"></Label>
     </ActionBar>
-    <FlexboxLayout justifyContent="space-around" flexWrap="wrap"  backgroundColor="#3c495e">
+    <FlexboxLayout  flexWrap="wrap"  backgroundColor="#3c495e">
       <template v-for="(item,index) in generatedList">
-         <Label @loaded="animateCard($event,index)"  v-show="!isShown(item)" class="card-hidden" width="30%" backgroundColor="#1c6b48" @tap="showCurrentItems(item,index)"  />
+         <!-- <Label @loaded="animateCard($event,index)"  v-show="!isShown(item)" class="card-hidden" width="30%" backgroundColor="#1c6b48" @tap="showCurrentItems(item,index)"  /> -->
          <Image width="30%" v-show="isShown(item)"  stretch="aspectFill"  class="card-image" :src="item.src" text="x"  />
+         <Image @tap="showCurrentItems(item,index)" :src="'~/images/question-bordered.png'" v-show="!isShown(item)" class="card-hidden" width="30%" @loaded="animateCard($event,index)"  />
+     
     
       </template>
     </FlexboxLayout> 
@@ -23,14 +25,14 @@
 </template>
 
 <script>
-import {application} from "tns-core-modules/application";
+import { application } from "tns-core-modules/application";
 export default {
   data: () => {
     return {
       message: "<!-- sBrowse page  -->",
       generatedList: [],
       flippedItems: [],
-      dataCreated:false,
+      dataCreated: false,
       closeCardInterval: "",
       closeCardIntervalTimer: 3000,
       clickCoutner: 0,
@@ -39,7 +41,7 @@ export default {
         {
           type: "banana",
           id: 1,
-          name: "Banana", 
+          name: "Banana",
           src: "~/images/banana.png"
         },
         {
@@ -94,17 +96,15 @@ export default {
     };
   },
   computed: {
-
-    foundCounterCopmuted(){
-      if(this.foundCounter>=2){
-       return this.foundCounter/2;
+    foundCounterCopmuted() {
+      if (this.foundCounter >= 2) {
+        return this.foundCounter / 2;
       }
       return 0;
-    }, 
+    },
 
     isShown() {
       return e => {
-     
         if (e.alreadyFound) {
           return true;
         }
@@ -119,12 +119,11 @@ export default {
   },
   methods: {
     onPageLoad(args) {
-      console.log('dcdcdc',this.dataCreated,this.flippedItems.length);
-      if(this.dataCreated){
+      console.log("dcdcdc", this.dataCreated, this.flippedItems.length);
+      if (this.dataCreated) {
         return;
       }
       this.generateCurrentGameList();
- 
     },
     generateCurrentGameList() {
       let list = [];
@@ -225,13 +224,12 @@ export default {
         // console.log("Dialog result: " + result);
       });
     },
-    animateCard(args,index){
+    animateCard(args, index) {
       // Početna animacija
       setTimeout(() => {
-        console.log('logme',index);
-          args.object.animate({ translate: { x: 0, y: 0 }, opacity: 1 });
-      }, index*120);
-    
+        console.log("logme", index);
+        args.object.animate({ translate: { x: 0, y: 0 }, opacity: 1 });
+      }, index * 120);
     }
   }
 };
@@ -246,18 +244,19 @@ export default {
 .card-hidden {
   height: 50;
   margin-top: 1%;
-  translateX :-300;
-  opacity:0;
-  // margin-left:2%;
+  translatex: -300;
+  opacity: 0;
+  margin-left: 2%;
+  border: 1px solid gray;
   // margin-left:1%;
   // margin-right:1%;
 }
 .card-image {
   height: 50;
   margin-top: 1%;
-  translateX :-300;
-  opacity:1;
-  // margin-left:1%;
+  translatex: -300;
+  opacity: 1;
+  margin-left: 2%;
   // margin-right:1%;
 }
 </style>
