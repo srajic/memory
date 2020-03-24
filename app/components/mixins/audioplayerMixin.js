@@ -12,9 +12,12 @@ export default {
         initPlayer() {
             // prosiriti webpack sa { from: { glob: "sounds/**/*" } },
             // { from: { glob: "**/*.mp3" } }
+            if (!this.audioFile) {
+                return;
+            }
             this.player = new TNSPlayer();
             const playerOptions = {
-                audioFile: "~/sounds/pop.ogg",
+                audioFile: this.audioFile,
                 loop: false,
                 completeCallback: function() {
                     console.log("finished playing");
@@ -42,6 +45,9 @@ export default {
 
         playPopSound() {
             // this.player.pause();
+            if (this.audioDisabled) {
+                return;
+            }
             this.player.play();
         }
     }
