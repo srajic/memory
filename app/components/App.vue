@@ -54,6 +54,7 @@ export default {
   },
   data() {
     return {
+      loopAudio: true,
       audioFile: "~/sounds/classicalPop.mp3"
     };
   },

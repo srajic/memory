@@ -18,7 +18,7 @@ export default {
             this.player = new TNSPlayer();
             const playerOptions = {
                 audioFile: this.audioFile,
-                loop: false,
+                loop: this.loopAudio || false,
                 completeCallback: function() {
                     console.log("finished playing");
                 },
