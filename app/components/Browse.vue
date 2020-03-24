@@ -25,17 +25,25 @@
 </template>
 
 <script>
-import { application } from "tns-core-modules/application";
+import * as app from "tns-core-modules/application";
+import { TNSPlayer } from "nativescript-audio";
+
 export default {
+  mounted() {
+    this.initPlayer();
+  },
   data: () => {
     return {
       message: "<!-- sBrowse page  -->",
       generatedList: [],
+      player: "",
+      playerOptions: "",
       flippedItems: [],
       dataCreated: false,
       closeCardInterval: "",
       closeCardIntervalTimer: 3000,
       clickCoutner: 0,
+      // popSound: sound.create("~/sounds/ClassicalPop.mp3"),
       foundCounter: 0,
       cardList: [
         {
@@ -125,6 +133,8 @@ export default {
       }
       this.generateCurrentGameList();
     },
+
+    // GAME METHODS
     generateCurrentGameList() {
       let list = [];
       this.cardList.forEach(element => {
@@ -153,6 +163,7 @@ export default {
       if (item.hasOwnProperty("alreadyFound") && item.alreadyFound) {
         return;
       }
+      this.playPopSound();
       this.cancleClosecardInterval();
       this.clickCoutner++;
       if (this.flippedItems.length === 2) {
@@ -205,6 +216,8 @@ export default {
       this.clickCoutner = 0;
       this.foundCounter = 0;
     },
+
+    // MODAL DIALOG
     popupDialog() {
       confirm({
         title: "Pobjedili ste !",
@@ -224,12 +237,52 @@ export default {
         // console.log("Dialog result: " + result);
       });
     },
+
+    // ANIMATIONS
     animateCard(args, index) {
       // Početna animacija
       setTimeout(() => {
         console.log("logme", index);
         args.object.animate({ translate: { x: 0, y: 0 }, opacity: 1 });
       }, index * 120);
+    },
+
+    // SOUNDS
+
+    initPlayer() {
+      // prosiriti webpack sa { from: { glob: "sounds/**/*" } },
+      // { from: { glob: "**/*.mp3" } }
+      this.player = new TNSPlayer();
+      const playerOptions = {
+        audioFile: "~/sounds/classicalPop.mp3",
+        loop: false,
+        completeCallback: function() {
+          console.log("finished playing");
+        },
+        errorCallback: function(errorObject) {
+          console.log(JSON.stringify(errorObject));
+        },
+        infoCallback: function(args) {
+          console.log(JSON.stringify(args));
+        }
+      };
+      this.player
+        .initFromFile(playerOptions)
+        .then(res => {
+          // this.player.getAudioTrackDuration().then(duration => {
+          //   // iOS: duration is in seconds
+          //   // Android: duration is in milliseconds
+          //   console.log(`song duration:`, duration);
+          // });
+        })
+        .catch(err => {
+          console.log("something went wrong...", err);
+        });
+    },
+
+    playPopSound() {
+      // this.player.pause();
+      this.player.play();
     }
   }
 };
