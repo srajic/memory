@@ -1,7 +1,7 @@
 <template lang="html">
    <Page @loaded="onPageLoad">
       <ActionBar>
-              <Label :text="'Clicks:' +clickCoutner +','+ 'Pairs found:'+ foundCounterCopmuted"></Label>
+          <Label :text="'Clicks:' +clickCoutner +','+ 'Pairs found:'+ foundCounterCopmuted"></Label>
       </ActionBar>
       <FlexboxLayout  flexWrap="wrap"  backgroundColor="#3c495e">
         <template v-for="(item,index) in generatedList">
@@ -91,6 +91,7 @@ export default {
   mounted() {
     this.initPlayer();
   },
+
   computed: {
     foundCounterCopmuted() {
       if (this.foundCounter >= 2) {
@@ -113,6 +114,7 @@ export default {
       };
     },
   },
+  
   methods: {
     onPageLoad(args) {
       console.log("dcdcdc", this.dataCreated, this.flippedItems.length);
@@ -185,7 +187,7 @@ export default {
         // console.log("timeout");
       }, this.closeCardIntervalTimer);
     },
-    
+
     cancleClosecardInterval() {
       clearTimeout(this.closeCardInterval);
     },
