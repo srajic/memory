@@ -1,27 +1,15 @@
 <template lang="html">
-    <Page @loaded="onPageLoad">
-   <ActionBar>
-            <Label :text="'Clicks:' +clickCoutner +','+ 'Pairs found:'+ foundCounterCopmuted"></Label>
-    </ActionBar>
-    <FlexboxLayout  flexWrap="wrap"  backgroundColor="#3c495e">
-      <template v-for="(item,index) in generatedList">
-         <!-- <Label @loaded="animateCard($event,index)"  v-show="!isShown(item)" class="card-hidden" width="30%" backgroundColor="#1c6b48" @tap="showCurrentItems(item,index)"  /> -->
-         <Image width="30%" v-show="isShown(item)"  stretch="aspectFill"  class="card-image" :src="item.src" text="x"  />
-         <Image @tap="showCurrentItems(item,index)" :src="'~/images/question-bordered.png'" v-show="!isShown(item)" class="card-hidden" width="30%" @loaded="animateCard($event,index)"  />
-     
-    
-      </template>
-    </FlexboxLayout> 
-
-    <!-- <WrapLayout  orientation="horizontal" height="100%"  backgroundColor="#3c495e">
-      <template v-for="(item,index) in generatedList">
-         <Label @loaded="animateCard($event,index)"   v-show="!isShown(item)" class="card-hidden" width="30%" backgroundColor="#1c6b48" @tap="showCurrentItems(item,index)"  />
-         <Image width="30%" v-show="isShown(item)"  stretch="aspectFill"  class="card-image" :src="item.src" text="x"  />
-    
-      </template>
-    </WrapLayout >  -->
-
-    </Page>
+   <Page @loaded="onPageLoad">
+      <ActionBar>
+              <Label :text="'Clicks:' +clickCoutner +','+ 'Pairs found:'+ foundCounterCopmuted"></Label>
+      </ActionBar>
+      <FlexboxLayout  flexWrap="wrap"  backgroundColor="#3c495e">
+        <template v-for="(item,index) in generatedList">
+          <Image width="30%" v-show="isShown(item)"  stretch="aspectFill"  class="card-image" :src="item.src" text="x"  />
+          <Image @tap="showCurrentItems(item,index)" :src="'~/images/question-bordered.png'" v-show="!isShown(item)" class="card-hidden" width="30%" @loaded="animateCard($event,index)"  />
+        </template>
+      </FlexboxLayout> 
+   </Page>
 </template>
 
 <script>
@@ -47,57 +35,57 @@ export default {
           type: "banana",
           id: 1,
           name: "Banana",
-          src: "~/images/banana.png"
+          src: "~/images/banana.png",
         },
         {
           type: "orange",
           id: 2,
           name: "Orange",
-          src: "~/images/orange.jpg"
+          src: "~/images/orange.jpg",
         },
         {
           type: "ananas",
           id: 3,
           name: "Ananas",
-          src: "~/images/ananas.jpg"
+          src: "~/images/ananas.jpg",
         },
         {
           type: "kiwi",
           id: 4,
           name: "Kiwi",
-          src: "~/images/kiwi.jpg"
+          src: "~/images/kiwi.jpg",
         },
         {
           type: "lemon",
           id: 5,
           name: "Lemon",
-          src: "~/images/lemon.png"
+          src: "~/images/lemon.png",
         },
         {
           type: "mango",
           id: 6,
           name: "Mango",
-          src: "~/images/mango.png"
+          src: "~/images/mango.png",
         },
         {
           type: "grape",
           id: 7,
           name: "Grape",
-          src: "~/images/grape.jpg"
+          src: "~/images/grape.jpg",
         },
         {
           type: "apple",
           id: 8,
           name: "Apple",
-          src: "~/images/apple.jpg"
+          src: "~/images/apple.jpg",
         },
         {
           type: "tangerine",
           id: 9,
           name: "Tangerine",
-          src: "~/images/tangerine.jpg"
-        }
-      ]
+          src: "~/images/tangerine.jpg",
+        },
+      ],
     };
   },
   mounted() {
@@ -112,7 +100,7 @@ export default {
     },
 
     isShown() {
-      return e => {
+      return (e) => {
         if (e.alreadyFound) {
           return true;
         }
@@ -123,7 +111,7 @@ export default {
         }
         return false;
       };
-    }
+    },
   },
   methods: {
     onPageLoad(args) {
@@ -137,7 +125,7 @@ export default {
     // GAME METHODS
     generateCurrentGameList() {
       let list = [];
-      this.cardList.forEach(element => {
+      this.cardList.forEach((element) => {
         let firstCard = JSON.parse(JSON.stringify(element));
         let secondCard = JSON.parse(JSON.stringify(element));
 
@@ -174,7 +162,7 @@ export default {
       if (this.flippedItems.length === 2) {
         this.startClosecardInterval();
         if (this.flippedItems[0].id === this.flippedItems[1].id) {
-          this.generatedList.forEach(e => {
+          this.generatedList.forEach((e) => {
             if (e.identifier === this.flippedItems[0].identifier) {
               e.alreadyFound = true;
               this.foundCounter++;
@@ -197,6 +185,7 @@ export default {
         // console.log("timeout");
       }, this.closeCardIntervalTimer);
     },
+    
     cancleClosecardInterval() {
       clearTimeout(this.closeCardInterval);
     },
@@ -223,18 +212,16 @@ export default {
         title: "Pobjedili ste !",
         message: "Želite li započeti novu igru",
         okButtonText: "Da",
-        cancelButtonText: "NE"
-      }).then(result => {
+        cancelButtonText: "NE",
+      }).then((result) => {
         // console.log(result);
         if (result) {
           this.resetGame();
         } else {
           this.resetGame();
-          // this
+          
         }
 
-        // The result property is true if the dialog is closed with the OK button, false if closed with the Cancel button or undefined if closed with a neutral button.
-        // console.log("Dialog result: " + result);
       });
     },
 
@@ -245,8 +232,8 @@ export default {
         console.log("logme", index);
         args.object.animate({ translate: { x: 0, y: 0 }, opacity: 1 });
       }, index * 120);
-    }
-  }
+    },
+  },
 };
 </script>
 
