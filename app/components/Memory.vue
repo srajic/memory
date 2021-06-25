@@ -114,7 +114,7 @@ export default {
       };
     },
   },
-  
+
   methods: {
     onPageLoad(args) {
       console.log("dcdcdc", this.dataCreated, this.flippedItems.length);
@@ -221,9 +221,7 @@ export default {
           this.resetGame();
         } else {
           this.resetGame();
-          
         }
-
       });
     },
 
