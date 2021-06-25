@@ -33,7 +33,7 @@ export default {
 
   data: () => {
     return {
-      message: "<!-- sBrowse page  -->",
+      message: "<!-- Memory page  -->",
       generatedList: [],
       flippedItems: [],
       audioFile: "~/sounds/pop.ogg",

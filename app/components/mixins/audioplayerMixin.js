@@ -32,11 +32,7 @@ export default {
             this.player
                 .initFromFile(playerOptions)
                 .then(res => {
-                    // this.player.getAudioTrackDuration().then(duration => {
-                    //   // iOS: duration is in seconds
-                    //   // Android: duration is in milliseconds
-                    //   console.log(`song duration:`, duration);
-                    // });
+              
                 })
                 .catch(err => {
                     console.log("something went wrong...", err);

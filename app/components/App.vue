@@ -3,12 +3,12 @@
        
     <BottomNavigation>
         <TabStrip>
-            <TabStripItem class="navigation__item">
+            <!-- <TabStripItem class="navigation__item">
                 <Label text="Homex"></Label>
                 <Image src.decode="font://&#xf015;" class="fas t-36"></Image>
-            </TabStripItem>
+            </TabStripItem> -->
             <TabStripItem class="navigation__item">
-                <Label text="Browse"></Label>
+                <Label text="Memory"></Label>
                 <Image src.decode="font://&#xf1ea;" class="far t-36"></Image>
             </TabStripItem>
             <TabStripItem class="navigation__item">
@@ -16,16 +16,16 @@
                 <Image src.decode="font://&#xf002;" class="fas t-36"></Image>
             </TabStripItem>
         </TabStrip>
-
+<!-- 
         <TabContentItem>
             <Frame>
                 <Items />
             </Frame>
-        </TabContentItem>
+        </TabContentItem> -->
 
         <TabContentItem>
             <Frame >
-                <Browse />
+                <Memory />
             </Frame>
         </TabContentItem>
 
@@ -40,16 +40,15 @@
 </template>
 
 <script>
-import Items from "./Items.vue";
-import Browse from "./Browse.vue";
+// import Items from "./Items.vue";
+import Memory from "./Memory.vue";
 import Search from "./Search.vue";
 import audioplayerMixin from "./mixins/audioplayerMixin";
 
 export default {
   mixins: [audioplayerMixin],
   components: {
-    Items,
-    Browse,
+    Memory,
     Search
   },
   data() {

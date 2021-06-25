@@ -59,7 +59,7 @@
           class="btn btn-primary m-t-20"
         ></Button>
         <Label
-          *v-show="isLoggingIn"
+          v-show="isLoggingIn"
           text="Forgot your password?"
           class="login-label"
           @tap="forgotPassword()"
@@ -126,20 +126,6 @@ export default {
         return;
       }
 
-      // this.$backendService
-      //     .register(this.user)
-      //     .then(() => {
-      //         this.processing = false;
-      //         this.alert(
-      //             "Your account was successfully created.");
-      //         this.isLoggingIn = true;
-      //     })
-      //     .catch(() => {
-      //         this.processing = false;
-      //         this.alert(
-      //             "Unfortunately we were unable to create your account."
-      //         );
-      //     });
     },
 
     forgotPassword() {
